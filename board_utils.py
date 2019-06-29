@@ -1,19 +1,16 @@
-from texttable import Texttable
+class BoardPosition(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
-class GameBoard(object):
-    def __init__(self, board=None, board_size=None):
-        self.board = board
-        self.size = board_size
+    def get_adj_left(self):
+        return BoardPosition(self.x, self.y - 1)
 
-    def __repr__(self):
-        t = Texttable()
-        for i in range(0, self.size):
-            t.add_row(self.board[i])
-        return t.draw()
+    def get_adj_right(self):
+        return BoardPosition(self.x, self.y + 1)
 
-    @classmethod
-    def get_new_randomized_board(cls, board_size):
-        board = [[1, 2, 3],
-                 [4, 5, 6],
-                 [7, 8, '']]
-        return GameBoard(board, board_size)
+    def get_adj_up(self):
+        return BoardPosition(self.x - 1, self.y)
+
+    def get_adj_down(self):
+        return BoardPosition(self.x + 1, self.y)
