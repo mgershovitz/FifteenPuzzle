@@ -1,6 +1,6 @@
 import curses
 
-from consts import TABLE_PADDING
+from common.consts import TABLE_PADDING
 from display_modules.basic_display import BasicDisplayUtils
 
 

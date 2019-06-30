@@ -1,4 +1,4 @@
-import consts
+from common import consts
 
 class InputManager(object):
     def __init__(self, settings, display):

@@ -1,4 +1,4 @@
-import consts
+from common import consts
 from display_modules.basic_display import BasicDisplayUtils
 from display_modules.controlled_display import ControlledDisplayUtils
 from game_logic import PuzzleGame
@@ -20,10 +20,10 @@ class PuzzleGameUI(object):
         self.display = None
 
     def movement_settings(self):
-        InputManager.user_input_loop(
+        self.input_manager.user_input_loop(
             message=consts.EDIT_MOVEMENT_SETTINGS_PROMPT,
             valid_inputs=[consts.YES, consts.NO],
-            input_to_action={'y': self.input_manager.get_movement_keys_edit_func(self.display.get_user_input)}
+            input_to_action={'y': self.input_manager.get_movement_keys_edit_func()}
         )
 
     def init_new_game(self):
@@ -65,12 +65,14 @@ class PuzzleGameUI(object):
     def run(self):
         print(consts.GAME_OPENING)
         self.input_manager.edit_settings()
+        self.settings.save_settings()
+
         self.movement_settings()
         self.init_new_game_and_start()
 
     def bootstrap(self):
         self.settings.load_settings()
-        self.display = BasicDisplayUtils() if self.settings.get(consts.DISPLAY_TYPE_STR) == consts.DEFAULT_DISPLAY_TYPE \
+        self.display = BasicDisplayUtils() if self.settings.get(consts.DISPLAY_TYPE_STR) == consts.BASIC_DISPLAY_TYPE \
             else ControlledDisplayUtils()
         self.input_manager = InputManager(self.settings, self.display)
 

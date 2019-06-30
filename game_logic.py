@@ -1,4 +1,4 @@
-import consts
+from common import consts
 from board_utils import BoardPosition
 
 class PuzzleGame(object):

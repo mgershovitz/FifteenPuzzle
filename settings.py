@@ -1,7 +1,13 @@
-import consts
+import json
+import os
+
+from common import consts
+from common.consts import SETTINGS_FILE
+
 
 class SettingsManager(object):
     def __init__(self):
+        self.settings_file_path = os.path.dirname(os.path.abspath(__file__)) + SETTINGS_FILE
         self.id_to_setting = {
             '1': consts.BOARD_SIZE_STR,
             '2': consts.EMPTY_SPOT_STR,
@@ -10,11 +16,14 @@ class SettingsManager(object):
         self.settings = {}
 
     def load_settings(self):
-        self.settings = {
-            consts.BOARD_SIZE_STR: consts.DEFAULT_BOARD_SIZE,
-            consts.EMPTY_SPOT_STR: (consts.DEFAULT_BOARD_SIZE - 1, consts.DEFAULT_BOARD_SIZE - 1),
-            consts.DISPLAY_TYPE_STR: consts.DEFAULT_DISPLAY_TYPE
-        }
+        with open(self.settings_file_path) as fp:
+            settings_from_file = json.load(fp)
+            for setting in self.id_to_setting.values():
+                self.settings[setting] = settings_from_file[setting]
+
+    def save_settings(self):
+        with open(self.settings_file_path, 'w') as fp:
+            json.dump(self.settings, fp)
 
     def get(self, setting):
         if setting in self.settings:
