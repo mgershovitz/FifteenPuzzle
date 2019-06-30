@@ -55,7 +55,7 @@ class Menus(object):
                 user_edit_value = [int(item) for item in user_edit_value.split(' ')]
 
         self.game_settings.set(setting_name, edit_params['type'], user_edit_value, edit_params['valid_inputs'])
-        self.game_settings.save_settings()
+        self.display.display_table(self.game_settings.settings_to_display())
         self.input_manager.basic_user_input_loop(message=consts.EDIT_GAME_SETTINGS_AGAIN,
                                                  valid_inputs=[consts.YES, consts.NO],
                                                  input_to_action={'y': self.open_game_settings_menu})

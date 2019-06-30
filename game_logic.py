@@ -4,22 +4,16 @@ from board_utils.matrix_board import BoardPosition
 
 class PuzzleGame(object):
     def __init__(self):
-        self.game_board = None
         self.board_size = None
-        self.board_generator = None
-        self.game_settings = None
+        self.game_board = None
 
-        self.tiles_in_place = set()
-        self.tiles_not_in_place = set()
+        self.tiles_in_place = None
+        self.tiles_not_in_place = None
 
-    def init_game(self, game_settings):
-        self.game_settings = game_settings
-        self.board_size = self.game_settings.get(consts.BOARD_SIZE_STR)
-        self.board_generator = RandomBoardGenerator(self.board_size)
-
-    def generate_new_puzzle(self, fixed_board=None):
-        self.game_board = self.board_generator.generate_board(
-            difficulty=self.game_settings.get(consts.DIFFICULTY_LEVEL_STR),
+    def generate_new_puzzle(self, game_settings, fixed_board=None):
+        self.board_size = game_settings.get(consts.BOARD_SIZE_STR)
+        self.game_board = RandomBoardGenerator(self.board_size).generate_board(
+            difficulty=game_settings.get(consts.DIFFICULTY_LEVEL_STR),
             fixed_board=fixed_board
         )
         self.create_initial_game_state()
@@ -45,6 +39,9 @@ class PuzzleGame(object):
             self.tiles_not_in_place.add(old_empty_spot)
 
     def create_initial_game_state(self):
+        self.tiles_in_place = set()
+        self.tiles_not_in_place = set()
+
         for i in range(0, self.board_size):
             for j in range(0, self.board_size):
                 pos = BoardPosition(i, j)

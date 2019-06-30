@@ -113,7 +113,7 @@ class GameSettingsManager(Settings):
                 'type': SettingsType.TYPE_NUMERIC
             },
             consts.DISPLAY_TYPE_STR: {
-                'msg': consts.CHOOSE_NEW_SETTING_VALUE % (consts.DIFFICULTY_LEVEL_STR, consts.BASIC_DISPLAY_TYPE),
+                'msg': consts.CHOOSE_NEW_SETTING_VALUE % (consts.DISPLAY_TYPE_STR, consts.BASIC_DISPLAY_TYPE),
                 'valid_inputs': [consts.BASIC_DISPLAY_TYPE],
                 'type': SettingsType.TYPE_STR
             }

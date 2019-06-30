@@ -41,16 +41,13 @@ class PuzzleGameUI(object):
 
     def start_new_game(self):
         print(consts.INIT_NEW_BOARD)
-        self.game.generate_new_puzzle()
+        self.game.generate_new_puzzle(self.game_settings)
         print(consts.LETS_START_THE_GAME)
-
         self.main_game_loop()
 
     def run(self):
-        self.game.init_game(self.game_settings)
         self.display.display_message(consts.GAME_OPENING)
         self.display.display_message(consts.RULES)
-
         self.menus.open_main_menu()
 
     @staticmethod
