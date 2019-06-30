@@ -14,3 +14,10 @@ class BoardPosition(object):
 
     def get_adj_down(self):
         return BoardPosition(self.x + 1, self.y)
+
+    def is_valid_board_position(self, board_size):
+        return 0 <= self.x <= board_size - 1 and 0 <= self.y <= board_size - 1
+
+    @classmethod
+    def get_position_from_indexes_tuple(cls, pos_tuple):
+        return BoardPosition(pos_tuple[0], pos_tuple[1])

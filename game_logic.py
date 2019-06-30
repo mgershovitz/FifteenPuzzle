@@ -5,14 +5,18 @@ class PuzzleGame(object):
     def __init__(self):
         self.board = None
         self.board_size = None
-        self.empty_spot = BoardPosition(2, 2)
+        self.empty_spot = None
 
-    def get_new_randomized_board(self, board_size):
+    def init_game(self, game_settings):
+        self.empty_spot = BoardPosition.get_position_from_indexes_tuple(game_settings.get(consts.EMPTY_SPOT_STR))
+        self.board_size = game_settings.get(consts.BOARD_SIZE_STR)
+        self.get_new_randomized_board()
+
+    def get_new_randomized_board(self):
         board = [[1, 2, 3],
                  [4, 5, 6],
                  [7, 8, consts.EMPTY_STR]]
         self.board = board
-        self.board_size = board_size
 
     def move(self, user_move):
         new_empty_spot = self.get_new_empty_spot_position(user_move)
@@ -22,14 +26,20 @@ class PuzzleGame(object):
             self.set(new_empty_spot, consts.EMPTY_STR)
             self.empty_spot = new_empty_spot
 
+    def win(self):
+        for i in range(0, self.board_size):
+            for j in range(0, self.board_size):
+                if i == self.board_size - 1 and j == self.board_size - 1:
+                    continue
+                if self.board[i][j] != i*self.board_size + j + 1:
+                    return False
+        return True
+
     def set(self, pos, val):
         self.board[pos.x][pos.y] = val
 
     def get(self, pos):
         return self.board[pos.x][pos.y]
-
-    def check_valid_position(self, pos):
-        return 0 <= pos.x <= self.board_size - 1 and 0<= pos.y <= self.board_size - 1
 
     def get_new_empty_spot_position(self, dir):
         # The empty spot is not the one that moves, the adjacent cells move,
@@ -44,5 +54,5 @@ class PuzzleGame(object):
         elif dir == consts.DOWN:
             new_pos = self.empty_spot.get_adj_up()
 
-        if new_pos and self.check_valid_position(new_pos):
+        if new_pos and new_pos.is_valid_board_position(self.board_size):
             return new_pos
