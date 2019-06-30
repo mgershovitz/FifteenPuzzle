@@ -1,6 +1,5 @@
 from common import consts
 from display_modules.basic_display import BasicDisplayUtils
-from display_modules.controlled_display import ControlledDisplayUtils
 from game_logic import PuzzleGame
 from input_manager import InputManager
 from settings.settings import GameSettingsManager, KeySettingsManager
@@ -40,9 +39,6 @@ class PuzzleGameUI(object):
                 self.game.move(user_move)
 
     def quit(self):
-        if isinstance(self.display, ControlledDisplayUtils):
-            self.display.break_display_control()
-
         print(consts.GOODBYE)
         exit(0)
 
@@ -54,7 +50,6 @@ class PuzzleGameUI(object):
         self.main_game_loop()
 
     def menu(self):
-        self.display.display_message(consts.CHOOSE_OPTION)
         self.input_manager.basic_user_input_loop(consts.MENU_OPTIONS,
                                                  ['1', '2', '3', '4'],
                                                  {'1': self.input_manager.handle_game_settings_edit,
@@ -73,8 +68,7 @@ class PuzzleGameUI(object):
     def bootstrap(self):
         self.game_settings.load_settings()
         self.keys_settings.load_settings()
-        self.display = BasicDisplayUtils() if self.game_settings.get(consts.DISPLAY_TYPE_STR) == consts.BASIC_DISPLAY_TYPE \
-            else ControlledDisplayUtils()
+        self.display = BasicDisplayUtils()
         self.display.init_display()
         self.input_manager = InputManager(self.game_settings, self.keys_settings, self.display)
 

@@ -103,25 +103,25 @@ class GameSettingsManager(Settings):
     def get_setting_name_to_edit_params(self):
         return {
             consts.BOARD_SIZE_STR: {
-                'msg': consts.CHOOSE_NEW_SETTING_VALUE_NUMERIC % (consts.BOARD_SIZE_STR, '2/9'),
+                'msg': consts.CHOOSE_NEW_SETTING_VALUE % (consts.BOARD_SIZE_STR, '2/9'),
                 'valid_inputs': range(2,10),
                 'type': SettingsType.TYPE_NUMERIC
             },
             consts.EMPTY_SPOT_STR: {
-                'msg': consts.CHOOSE_NEW_SETTING_VALUE_STR % (consts.EMPTY_SPOT_STR, 'x y'),
+                'msg': consts.CHOOSE_NEW_SETTING_VALUE_IN_FORMAT % (consts.EMPTY_SPOT_STR, 'x y'),
                 'valid_inputs': [[i,j]
                                  for i in range(0, self.get(consts.BOARD_SIZE_STR))
                                  for j in range(0, self.get(consts.BOARD_SIZE_STR))],
                 'type': SettingsType.TYPE_TUPLE
             },
             consts.DIFFICULTY_LEVEL_STR: {
-                'msg': consts.CHOOSE_NEW_SETTING_VALUE_NUMERIC % (consts.DIFFICULTY_LEVEL_STR, '1-20'),
+                'msg': consts.CHOOSE_NEW_SETTING_VALUE % (consts.DIFFICULTY_LEVEL_STR, '1-20'),
                 'valid_inputs': range(1, 20),
                 'type': SettingsType.TYPE_NUMERIC
             },
             consts.DISPLAY_TYPE_STR: {
-                'msg': consts.CHOOSE_NEW_SETTING_VALUE_STR % (consts.DIFFICULTY_LEVEL_STR, 'basic/controlled'),
-                'valid_inputs': [consts.BASIC_DISPLAY_TYPE, consts.CONTROLLED_DISPLAY_TYPE],
+                'msg': consts.CHOOSE_NEW_SETTING_VALUE % (consts.DIFFICULTY_LEVEL_STR, consts.BASIC_DISPLAY_TYPE),
+                'valid_inputs': [consts.BASIC_DISPLAY_TYPE],
                 'type': SettingsType.TYPE_STR
             }
         }
