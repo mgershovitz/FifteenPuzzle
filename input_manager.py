@@ -1,56 +1,67 @@
 from common import consts
+from settings import SettingsType
+
 
 class InputManager(object):
-    def __init__(self, settings, display):
-        self.settings = settings
+    def __init__(self, game_settings, keys_settings, display):
+        self.game_settings = game_settings
+        self.keys_settings = keys_settings
+
         self.display = display
-        self.movement_keys = {
-            consts.UP_KEY: consts.UP,
-            consts.DOWN_KEY: consts.DOWN,
-            consts.LEFT_KEY: consts.LEFT,
-            consts.RIGHT_KEY: consts.RIGHT
-        }
-        self.action_key = {
-        }
 
-    def edit_settings(self):
+    def edit_game_settings(self):
+        self.edit_settings_prompt(consts.EDIT_GAME_SETTINGS_PROMPT, self.handle_game_settings_edit)
+
+    def edit_keys_settings(self):
+        self.edit_settings_prompt(consts.EDIT_KEYS_SETTINGS_PROMPT, self.handle_keys_settings_edit)
+
+    def edit_settings_prompt(self, message, edit_func):
+        self.basic_user_input_loop(message=message, valid_inputs=[consts.YES, consts.NO],
+                                   input_to_action={'y': edit_func})
+
+    def handle_game_settings_edit(self):
+        self.display.display_table(self.game_settings.settings_to_display())
         user_input = None
-        while user_input != 'n':
-            user_input = self.user_input_loop(
-                message=consts.EDIT_SETTINGS_PROMPT,
-                valid_inputs=[consts.YES, consts.NO],
-                input_to_action={'y': self.handle_settings_edit}
+
+        while user_input not in self.game_settings.settings_ids:
+            self.display.display_message(consts.CHOOSE_SETTING_TO_EDIT
+                                         % '/'.join(self.game_settings.settings_ids))
+            user_input = self.display.get_user_input()
+
+        setting_id = user_input
+        setting_name = self.game_settings.id_to_setting_name[setting_id]
+        edit_params = self.game_settings.setting_name_to_edit_params[setting_name]
+
+        user_edit_value = None
+        while user_edit_value not in edit_params['valid_inputs']:
+            self.display.display_message(edit_params['msg'])
+            user_edit_value = self.display.get_user_input()
+            if edit_params['type'] == SettingsType.TYPE_NUMERIC:
+                user_edit_value = int(user_edit_value)
+
+        self.game_settings.set(setting_name, edit_params['type'], user_edit_value, edit_params['valid_inputs'])
+        self.game_settings.save_settings()
+
+    def handle_keys_settings_edit(self):
+        self.display.display_table(self.keys_settings.settings_to_display())
+        for key_name, key_message in self.keys_settings.keys_names_to_edit_message.items():
+            self.display.display_message(key_message)
+            user_input = self.display.get_user_input()
+            self.keys_settings.set(
+                key_name,
+                SettingsType.TYPE_STR,
+                user_input
             )
-
-    def handle_settings_edit(self):
-        print(self.settings)
-        self.user_input_loop(
-            consts.CHOOSE_SETTING_TO_EDIT % \
-            '/'.join(self.settings.get_valid_inputs_for_editing()),
-            self.settings.id_to_setting.keys(),
-            self.settings.get_settings_number_to_edit_action()
-        )
-
-    def get_movement_keys_edit_func(self):
-        def edit_movement_keys_func():
-            print(consts.RIGHT_KEY_MESSAGE)
-            self.movement_keys[self.display.get_user_input()] = consts.RIGHT
-            print(consts.LEFT_KEY_MESSAGE)
-            self.movement_keys[self.display.get_user_input()] = consts.LEFT
-            print(consts.UP_KEY_MESSAGE)
-            self.movement_keys[self.display.get_user_input()] = consts.UP
-            print(consts.DOWN_KEY_MESSAGE)
-            self.movement_keys[self.display.get_user_input()] = consts.DOWN
-        return edit_movement_keys_func
+        self.keys_settings.save_settings()
 
     def get_user_move(self, char):
-        if char in self.movement_keys:
-            return self.movement_keys[char]
+        move = self.keys_settings.keys_to_keys_names.get(char)
+        return move
 
-    def user_input_loop(self, message, valid_inputs, input_to_action):
+    def basic_user_input_loop(self, message, valid_inputs, input_to_action):
         user_input = None
         while user_input not in valid_inputs:
-            print(message)
+            self.display.display_message(message)
             user_input = self.display.get_user_input()
 
         if user_input in input_to_action:

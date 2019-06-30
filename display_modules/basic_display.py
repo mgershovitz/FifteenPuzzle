@@ -14,8 +14,8 @@ class BasicDisplayUtils(object):
     def display_message(self, message):
         print(message)
 
-    def display_game_board(self, board):
+    def display_table(self, table):
         t = texttable.Texttable()
-        for i in range(0, len(board)):
-            t.add_row([val for val in board[i]])
+        for i in range(0, len(table)):
+            t.add_row([val for val in table[i]])
         print(t.draw())

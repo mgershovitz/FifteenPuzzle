@@ -18,8 +18,8 @@ class ControlledDisplayUtils(BasicDisplayUtils):
     def display_message(self, message):
         self.screen.addstr(0, 0, message)
 
-    def display_game_board(self, board):
-        board_display_matrix = self.get_baord_display_matrix(board)
+    def display_table(self, table):
+        board_display_matrix = self.get_baord_display_matrix(table)
         for pos, val in board_display_matrix.items():
             self.screen.addstr(pos[0], pos[1], val)
 

@@ -3,7 +3,7 @@ from display_modules.basic_display import BasicDisplayUtils
 from display_modules.controlled_display import ControlledDisplayUtils
 from game_logic import PuzzleGame
 from input_manager import InputManager
-from settings import SettingsManager
+from settings import GameSettingsManager, KeySettingsManager
 
 
 class PuzzleGameUI(object):
@@ -14,16 +14,10 @@ class PuzzleGameUI(object):
     """
     def __init__(self):
         self.game = PuzzleGame()
-        self.settings = SettingsManager()
+        self.game_settings = GameSettingsManager()
+        self.keys_settings = KeySettingsManager()
         self.input_manager = None
         self.display = None
-
-    def movement_settings(self):
-        self.input_manager.user_input_loop(
-            message=consts.EDIT_MOVEMENT_SETTINGS_PROMPT,
-            valid_inputs=[consts.YES, consts.NO],
-            input_to_action={'y': self.input_manager.get_movement_keys_edit_func()}
-        )
 
     def init_new_game(self):
         print(consts.README)
@@ -36,19 +30,17 @@ class PuzzleGameUI(object):
         self.display.init_display()
 
         while True:
-            self.display.display_game_board(self.game.get_display_matrix())
+            self.display.display_table(self.game.get_display_matrix())
             if self.game.game_won():
-                self.input_manager.user_input_loop(consts.WIN_MESSAGE,
-                                                   [consts.YES, consts.NO],
-                                                   {'y': self.start_new_game,
-                                                    'n': self.quit})
+                self.input_manager.basic_user_input_loop(consts.WIN_MESSAGE, [consts.YES, consts.NO],
+                                                         {'y': self.start_new_game,
+                                                          'n': self.quit})
 
             key = self.display.get_user_input()
             user_move = self.input_manager.get_user_move(key)
             if user_move is None:
-                self.input_manager.user_input_loop(consts.SURE_YOU_WANT_TO_QUIT,
-                                                   [consts.YES, consts.NO],
-                                                   {'y': self.quit})
+                self.input_manager.basic_user_input_loop(consts.SURE_YOU_WANT_TO_QUIT, [consts.YES, consts.NO],
+                                                         {'y': self.quit})
 
             if user_move:
                 self.game.move(user_move)
@@ -66,18 +58,18 @@ class PuzzleGameUI(object):
 
     def run(self):
         self.display.display_message(consts.GAME_OPENING)
-        self.input_manager.edit_settings()
-        self.settings.save_settings()
-        self.game.init_game(self.settings)
-        self.movement_settings()
+        self.input_manager.edit_game_settings()
+        self.input_manager.edit_keys_settings()
+
+        self.game.init_game(self.game_settings)
 
         self.start_new_game()
 
     def bootstrap(self):
-        self.settings.load_settings()
-        self.display = BasicDisplayUtils() if self.settings.get(consts.DISPLAY_TYPE_STR) == consts.BASIC_DISPLAY_TYPE \
+        self.game_settings.load_settings()
+        self.display = BasicDisplayUtils() if self.game_settings.get(consts.DISPLAY_TYPE_STR) == consts.BASIC_DISPLAY_TYPE \
             else ControlledDisplayUtils()
-        self.input_manager = InputManager(self.settings, self.display)
+        self.input_manager = InputManager(self.game_settings, self.keys_settings, self.display)
 
 
 if __name__ == '__main__':

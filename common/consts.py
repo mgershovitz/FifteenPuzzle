@@ -10,8 +10,8 @@ INIT_NEW_BOARD = "Initializing a new board for you..."
 LETS_START_THE_GAME = "Lets start the game!\n" \
                       "Use your arrow keys to move any plate adjacent to an empty spot into the empty spot\n" \
                       "and press any other key to quit"
-EDIT_SETTINGS_PROMPT = "Would you like to change the game settings? [%s/%s]" % (YES, NO)
-EDIT_MOVEMENT_SETTINGS_PROMPT = "Would you like to change the movement keys? [%s/%s]" % (YES, NO)
+EDIT_GAME_SETTINGS_PROMPT = "Would you like to change the game settings? [%s/%s]" % (YES, NO)
+EDIT_KEYS_SETTINGS_PROMPT = "Would you like to change the control keys? [%s/%s]" % (YES, NO)
 CHOOSE_SETTING_TO_EDIT = "Choose the number of the setting you would like to edit [%s]"
 CHOOSE_NEW_SETTING_VALUE_NUMERIC = "Enter new value for setting %s [%s]"
 CHOOSE_NEW_SETTING_VALUE_STR = "Enter new value for setting %s in the format - %s"
@@ -26,17 +26,13 @@ RIGHT_KEY_MESSAGE = "Press the key you want to use for 'right' movement"
 LEFT_KEY_MESSAGE = "Press the key you want to use for 'left' movement"
 
 # Game Settings
-SETTINGS_FILE = "/common/settings.json"
+GAME_SETTINGS_FILE = "/common/game_settings.json"
+KEYS_SETTINGS_FILE = "/common/keys_settings.json"
 
 BOARD_SIZE_STR = "Board Size"
 EMPTY_SPOT_STR = "Empty Spot"
 DISPLAY_TYPE_STR = "Display Type"
 DIFFICULTY_LEVEL_STR = "Difficulty"
-
-UP_KEY = 'k'
-DOWN_KEY = ','
-LEFT_KEY = 'm'
-RIGHT_KEY = '.'
 
 # Display Settings
 TABLE_PADDING = 3

@@ -3,7 +3,7 @@ import unittest
 
 from common import consts
 from game_logic import PuzzleGame
-from settings import SettingsManager
+from settings import GameSettingsManager
 
 COMPLETED_BOARD = [[1, 2, 3],
                    [4, 5, 6],
@@ -24,7 +24,7 @@ def get_almost_complete_board():
 class TestGameBoard(unittest.TestCase):
     def setUp(self):
         self.tester = PuzzleGame()
-        self.test_settings = SettingsManager()
+        self.test_settings = GameSettingsManager()
         self.test_settings.load_settings()
 
     def test_initial_boards_game_won(self):
