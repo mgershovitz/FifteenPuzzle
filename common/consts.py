@@ -40,7 +40,6 @@ GAME_SETTINGS_FILE = "/game_settings.json"
 KEYS_SETTINGS_FILE = "/keys_settings.json"
 
 BOARD_SIZE_STR = "Board Size"
-EMPTY_SPOT_STR = "Empty Spot"
 DISPLAY_TYPE_STR = "Display Type"
 DIFFICULTY_LEVEL_STR = "Difficulty"
 

@@ -100,7 +100,3 @@ class BoardPosition(object):
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
-
-    @classmethod
-    def get_position_from_indexes_tuple(cls, pos_tuple):
-        return BoardPosition(pos_tuple[0], pos_tuple[1])

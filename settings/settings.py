@@ -78,7 +78,6 @@ class GameSettingsManager(Settings):
         super(GameSettingsManager, self).__init__()
         self.settings_names = [
             consts.BOARD_SIZE_STR,
-            consts.EMPTY_SPOT_STR,
             consts.DISPLAY_TYPE_STR,
             consts.DIFFICULTY_LEVEL_STR
         ]
@@ -100,19 +99,13 @@ class GameSettingsManager(Settings):
             id_to_setting_name[str(i)] = self.settings_names[i-1]
         return id_to_setting_name
 
-    def get_setting_name_to_edit_params(self):
+    @staticmethod
+    def get_setting_name_to_edit_params():
         return {
             consts.BOARD_SIZE_STR: {
                 'msg': consts.CHOOSE_NEW_SETTING_VALUE % (consts.BOARD_SIZE_STR, '2/9'),
                 'valid_inputs': range(2,10),
                 'type': SettingsType.TYPE_NUMERIC
-            },
-            consts.EMPTY_SPOT_STR: {
-                'msg': consts.CHOOSE_NEW_SETTING_VALUE_IN_FORMAT % (consts.EMPTY_SPOT_STR, 'x y'),
-                'valid_inputs': [[i,j]
-                                 for i in range(0, self.get(consts.BOARD_SIZE_STR))
-                                 for j in range(0, self.get(consts.BOARD_SIZE_STR))],
-                'type': SettingsType.TYPE_TUPLE
             },
             consts.DIFFICULTY_LEVEL_STR: {
                 'msg': consts.CHOOSE_NEW_SETTING_VALUE % (consts.DIFFICULTY_LEVEL_STR, '1-20'),

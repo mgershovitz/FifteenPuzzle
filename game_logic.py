@@ -15,9 +15,7 @@ class PuzzleGame(object):
     def init_game(self, game_settings):
         self.game_settings = game_settings
         self.board_size = self.game_settings.get(consts.BOARD_SIZE_STR)
-        self.board_generator = RandomBoardGenerator(
-            self.board_size, game_settings.get(consts.EMPTY_SPOT_STR)
-        )
+        self.board_generator = RandomBoardGenerator(self.board_size)
 
     def generate_new_puzzle(self, fixed_board=None):
         self.game_board = self.board_generator.generate_board(
