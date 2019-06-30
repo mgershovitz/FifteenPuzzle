@@ -11,6 +11,6 @@ class TestBoard(unittest.TestCase):
         boards_number = 10
         boards = []
         for i in range(0, boards_number):
-            new_board = self.tester.generate_board()
+            new_board = self.tester.generate_board(difficulty=5)
             assert new_board not in boards
             boards.append(new_board)

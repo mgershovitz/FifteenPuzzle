@@ -7,16 +7,23 @@ class PuzzleGame(object):
         self.game_board = None
         self.board_size = None
         self.board_generator = None
+        self.game_settings = None
 
         self.tiles_in_place = set()
         self.tiles_not_in_place = set()
 
-    def init_game(self, game_settings, fixed_board=None):
-        self.board_size = game_settings.get(consts.BOARD_SIZE_STR)
+    def init_game(self, game_settings):
+        self.game_settings = game_settings
+        self.board_size = self.game_settings.get(consts.BOARD_SIZE_STR)
         self.board_generator = RandomBoardGenerator(
             self.board_size, game_settings.get(consts.EMPTY_SPOT_STR)
         )
-        self.game_board = self.board_generator.generate_board(fixed_board=fixed_board)
+
+    def init_new_puzzle(self, fixed_board=None):
+        self.game_board = self.board_generator.generate_board(
+            difficulty=self.game_settings.get(consts.DIFFICULTY_LEVEL_STR),
+            fixed_board=fixed_board
+        )
         self.create_initial_game_state()
 
     def game_won(self):

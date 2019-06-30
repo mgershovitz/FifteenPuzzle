@@ -40,7 +40,7 @@ class Board(object):
         neighbour_pos = self.get_neighbour_by_direction(direction)
         if not neighbour_pos:
             raise Exception
-        self.move_empty_spot_to_new_position(neighbour_pos)
+        return self.move_empty_spot_to_new_position(neighbour_pos)
 
     def move_empty_spot_to_new_position(self, pos):
         new_val = self.get(pos)

@@ -12,7 +12,6 @@ class PuzzleGameUI(object):
     Handles user interaction, run main game loop, calls display and logic modules.
 
     """
-
     def __init__(self):
         self.game = PuzzleGame()
         self.settings = SettingsManager()
@@ -29,10 +28,11 @@ class PuzzleGameUI(object):
     def init_new_game(self):
         print(consts.README)
         print(consts.INIT_NEW_BOARD)
-        self.game.init_game(self.settings)
+
+        self.game.init_new_puzzle()
         print(consts.LETS_START_THE_GAME)
 
-    def start(self):
+    def main_game_loop(self):
         self.display.init_display()
 
         while True:
@@ -40,7 +40,7 @@ class PuzzleGameUI(object):
             if self.game.game_won():
                 self.input_manager.user_input_loop(consts.WIN_MESSAGE,
                                                    [consts.YES, consts.NO],
-                                                   {'y': self.init_new_game_and_start,
+                                                   {'y': self.start_new_game,
                                                     'n': self.quit})
 
             key = self.display.get_user_input()
@@ -49,13 +49,13 @@ class PuzzleGameUI(object):
                 self.input_manager.user_input_loop(consts.SURE_YOU_WANT_TO_QUIT,
                                                    [consts.YES, consts.NO],
                                                    {'y': self.quit})
-                
+
             if user_move:
                 self.game.move(user_move)
 
-    def init_new_game_and_start(self):
+    def start_new_game(self):
         self.init_new_game()
-        self.start()
+        self.main_game_loop()
 
     def quit(self):
         if isinstance(self.display, ControlledDisplayUtils):
@@ -65,12 +65,13 @@ class PuzzleGameUI(object):
         exit(0)
 
     def run(self):
-        print(consts.GAME_OPENING)
+        self.display.display_message(consts.GAME_OPENING)
         self.input_manager.edit_settings()
         self.settings.save_settings()
-
+        self.game.init_game(self.settings)
         self.movement_settings()
-        self.init_new_game_and_start()
+
+        self.start_new_game()
 
     def bootstrap(self):
         self.settings.load_settings()

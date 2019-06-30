@@ -25,7 +25,7 @@ class RandomBoardGenerator(object):
                     n += 1
         return board
 
-    def generate_board(self, difficulty=1, fixed_board=None):
+    def generate_board(self, difficulty, fixed_board=None):
         self.game_board = Board(
             copy.deepcopy(self.solved_board),
             self.board_size,
@@ -35,7 +35,7 @@ class RandomBoardGenerator(object):
         if fixed_board:
             self.game_board.board = fixed_board
         else:
-            for i in range(0, 20*difficulty):
+            for i in range(0, 10*difficulty):
                 self.move_randomly()
 
         return self.game_board

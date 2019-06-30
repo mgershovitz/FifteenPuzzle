@@ -11,7 +11,8 @@ class SettingsManager(object):
         self.id_to_setting = {
             '1': consts.BOARD_SIZE_STR,
             '2': consts.EMPTY_SPOT_STR,
-            '3': consts.DISPLAY_TYPE_STR
+            '3': consts.DISPLAY_TYPE_STR,
+            '4': consts.DIFFICULTY_LEVEL_STR
         }
         self.settings = {}
 
