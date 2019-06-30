@@ -15,6 +15,11 @@ LETS_START_THE_GAME = "Lets start the game!\n" \
                       "Use your arrow keys to move any plate adjacent to an empty spot and press any other key to quit."
 
 MENU_OPTIONS = "\nChoose option:\n1) Edit game settings\n2) Edit control keys\n3) Start a new game\n4) Quit"
+OPTION_EDIT_GAME_SETTINGS = "Edit game settings"
+OPTION_EDIT_CONTROL_KEYS = "Edit control keys"
+OPTION_START_NEW_GAME = "Start a new game"
+OPTION_QUIT = "Quit"
+
 EDIT_GAME_SETTINGS_AGAIN = "Would you like to change another game settings? [%s/%s]" % (YES, NO)
 
 CHOOSE_SETTING_TO_EDIT = "Choose the number of the setting you would like to edit [%s]"

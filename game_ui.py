@@ -25,19 +25,23 @@ class PuzzleGameUI(object):
         while True:
             self.display.display_table(self.game.get_display_matrix())
             if self.game.game_won():
-                self.input_manager.basic_user_input_loop(consts.WIN_MESSAGE, [consts.YES, consts.NO],
-                                                         {'y': self.start_new_game,
-                                                          'n': self.quit})
+                self.handle_game_won()
 
             key = self.input_manager.get_user_input()
             user_move = self.input_manager.get_user_move(key)
             if user_move is None:
-                user_quit = self.input_manager.basic_user_input_loop(consts.SURE_YOU_WANT_TO_QUIT, [consts.YES, consts.NO])
-                if user_quit == 'y':
+                if self.input_manager.basic_user_input_loop(
+                        consts.SURE_YOU_WANT_TO_QUIT, [consts.YES, consts.NO]) == consts.YES:
                     self.menus.open_main_menu()
 
             if user_move:
                 self.game.move(user_move)
+
+    def handle_game_won(self):
+        if self.input_manager.basic_user_input_loop(consts.WIN_MESSAGE, [consts.YES, consts.NO]) == consts.YES:
+            self.start_new_game()
+        else:
+            self.quit()
 
     def start_new_game(self):
         print(consts.INIT_NEW_BOARD)

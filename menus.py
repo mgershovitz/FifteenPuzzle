@@ -2,6 +2,15 @@ from common import consts
 from settings.settings import SettingsType
 
 
+class MenuOption(object):
+    def __init__(self, option, action):
+        self.option = option
+        self.action = action
+
+    def choose(self):
+        self.action()
+
+
 class Menus(object):
     def __init__(self, input_manager, display, game_settings, key_settings, start_func, quit_func):
         self.input_manager = input_manager
@@ -11,13 +20,21 @@ class Menus(object):
         self.start_game_func = start_func
         self.quit_func = quit_func
 
+        self.main_menu = {
+            '1': MenuOption(consts.OPTION_EDIT_GAME_SETTINGS,
+                            self.open_game_settings_menu),
+            '2': MenuOption(consts.OPTION_EDIT_CONTROL_KEYS,
+                            self.open_keys_settings_menu),
+            '3': MenuOption(consts.OPTION_START_NEW_GAME,
+                            self.start_game_func),
+            '4': MenuOption(consts.OPTION_QUIT,
+                            self.quit_func)
+        }
+
     def open_main_menu(self):
-        self.input_manager.basic_user_input_loop(consts.MENU_OPTIONS,
-                                                 ['1', '2', '3', '4'],
-                                                 {'1': self.open_game_settings_menu,
-                                                  '2': self.open_keys_settings_menu,
-                                                  '3': self.start_game_func,
-                                                  '4': self.quit_func})
+        user_input = self.input_manager.basic_user_input_loop(consts.MENU_OPTIONS,
+                                                              ['1', '2', '3', '4'])
+        self.main_menu[user_input].choose()
         self.open_main_menu()
 
     def open_keys_settings_menu(self):
@@ -56,6 +73,7 @@ class Menus(object):
 
         self.game_settings.set(setting_name, edit_params['type'], user_edit_value, edit_params['valid_inputs'])
         self.display.display_table(self.game_settings.settings_to_display())
-        self.input_manager.basic_user_input_loop(message=consts.EDIT_GAME_SETTINGS_AGAIN,
-                                                 valid_inputs=[consts.YES, consts.NO],
-                                                 input_to_action={'y': self.open_game_settings_menu})
+
+        if self.input_manager.basic_user_input_loop(
+                message=consts.EDIT_GAME_SETTINGS_AGAIN, valid_inputs=[consts.YES, consts.NO]) == consts.YES:
+            self.open_game_settings_menu()

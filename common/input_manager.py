@@ -12,13 +12,10 @@ class InputManager(object):
         move = self.keys_settings.keys_to_keys_names.get(char)
         return move
 
-    def basic_user_input_loop(self, message, valid_inputs, input_to_action=None):
+    def basic_user_input_loop(self, message, valid_inputs):
         user_input = None
         while user_input not in valid_inputs:
             self.display.display_message(message)
             user_input = self.get_user_input()
-
-        if input_to_action and user_input in input_to_action:
-            input_to_action[user_input]()
 
         return user_input
