@@ -1,64 +1,52 @@
 from common import consts
-from board_utils import BoardPosition
+from board_utils.matrix_board import Board, BoardPosition
+
 
 class PuzzleGame(object):
     def __init__(self):
         self.board = None
         self.board_size = None
-        self.empty_spot = None
+
+        self.tiles_in_place = set()
+        self.tiles_not_in_place = set()
 
     def init_game(self, game_settings):
-        self.empty_spot = BoardPosition.get_position_from_indexes_tuple(game_settings.get(consts.EMPTY_SPOT_STR))
         self.board_size = game_settings.get(consts.BOARD_SIZE_STR)
-        self.get_new_randomized_board()
+        self.board = Board(self.board_size, game_settings.get(consts.EMPTY_SPOT_STR))
+        self.board.get_new_randomized_board()
+        self.create_initial_game_state()
 
-    def get_new_randomized_board(self):
-        n = 1
-        self.board = list()
-        for i in range(0, self.board_size):
-            self.board.append(list())
-            for j in range(0, self.board_size):
-                if self.empty_spot.x == i and self.empty_spot.y == j:
-                    self.board[i].append(consts.EMPTY_STR)
-                else:
-                    self.board[i].append(n)
-                    n += 1
+    def game_won(self):
+        return len(self.tiles_not_in_place) == 0
 
     def move(self, user_move):
-        new_empty_spot = self.get_new_empty_spot_position(user_move)
+        old_empty_spot, new_empty_spot = self.board.execute_move(user_move)
         if new_empty_spot:
-            old_empty_spot = self.empty_spot
-            self.set(old_empty_spot, self.get(new_empty_spot))
-            self.set(new_empty_spot, consts.EMPTY_STR)
-            self.empty_spot = new_empty_spot
+            self.update_game_state(old_empty_spot, new_empty_spot)
+        print(self.tiles_not_in_place)
 
-    def win(self):
+    def update_game_state(self, old_empty_spot, new_empty_spot):
+        if new_empty_spot in self.tiles_not_in_place:
+            self.tiles_not_in_place.remove(new_empty_spot)
+        else:
+            self.tiles_in_place.remove(new_empty_spot)
+
+        if self.board.position_matches_value(old_empty_spot):
+            self.tiles_in_place.add(old_empty_spot)
+        else:
+            self.tiles_not_in_place.add(old_empty_spot)
+
+    def create_initial_game_state(self):
         for i in range(0, self.board_size):
             for j in range(0, self.board_size):
-                if i == self.board_size - 1 and j == self.board_size - 1:
+                pos = BoardPosition(i, j)
+                if self.board.get(pos) == consts.EMPTY_STR:
                     continue
-                if self.board[i][j] != i*self.board_size + j + 1:
-                    return False
-        return True
+                else:
+                    if self.board.position_matches_value(pos):
+                        self.tiles_in_place.add(pos)
+                    else:
+                        self.tiles_not_in_place.add(pos)
 
-    def set(self, pos, val):
-        self.board[pos.x][pos.y] = val
-
-    def get(self, pos):
-        return self.board[pos.x][pos.y]
-
-    def get_new_empty_spot_position(self, dir):
-        # The empty spot is not the one that moves, the adjacent cells move,
-        # So to make a right move, we need to check if the left adjacent cell can move right etc...
-        new_pos = None
-        if dir == consts.RIGHT:
-            new_pos = self.empty_spot.get_adj_left()
-        elif dir == consts.LEFT:
-            new_pos = self.empty_spot.get_adj_right()
-        elif dir == consts.UP:
-            new_pos = self.empty_spot.get_adj_down()
-        elif dir == consts.DOWN:
-            new_pos = self.empty_spot.get_adj_up()
-
-        if new_pos and new_pos.is_valid_board_position(self.board_size):
-            return new_pos
+    def get_display_matrix(self):
+        return self.board.board

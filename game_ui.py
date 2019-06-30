@@ -34,10 +34,10 @@ class PuzzleGameUI(object):
 
     def start(self):
         self.display.init_display()
-        self.display.display_game_board(self.game.board)
 
         while True:
-            if self.game.win():
+            self.display.display_game_board(self.game.get_display_matrix())
+            if self.game.game_won():
                 self.input_manager.user_input_loop(consts.WIN_MESSAGE,
                                                    [consts.YES, consts.NO],
                                                    {'y': self.init_new_game_and_start,
@@ -49,7 +49,6 @@ class PuzzleGameUI(object):
                 break
 
             self.game.move(user_move)
-            self.display.display_game_board(self.game.board)
 
         if isinstance(self.display, ControlledDisplayUtils):
             self.display.break_display_control()
