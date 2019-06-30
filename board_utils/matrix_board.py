@@ -1,22 +1,10 @@
 from common import consts
 
 class Board(object):
-    def __init__(self, board_size, empty_spot):
-        self.board = None
+    def __init__(self, board, board_size, empty_spot):
+        self.board = board
         self.board_size = board_size
         self.empty_spot = BoardPosition.get_position_from_indexes_tuple(empty_spot)
-
-    def get_new_randomized_board(self,):
-        n = 1
-        self.board = list()
-        for i in range(0, self.board_size):
-            self.board.append(list())
-            for j in range(0, self.board_size):
-                if self.empty_spot.x == i and self.empty_spot.y == j:
-                    self.board[i].append(consts.EMPTY_STR)
-                else:
-                    self.board[i].append(n)
-                    n += 1
 
     def get(self, pos):
         if self.is_valid_board_position(pos):
@@ -68,9 +56,6 @@ class Board(object):
     def get_tile_bellow_empty_spot(self):
         if self.empty_spot.x < self.board_size - 1:
             return self.board[self.empty_spot.x + 1][self.empty_spot.y]
-
-    def __eq__(self, other):
-        return self.board == other.board
 
 class BoardPosition(object):
     def __init__(self, x, y):
