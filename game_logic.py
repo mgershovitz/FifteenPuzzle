@@ -23,10 +23,10 @@ class PuzzleGame(object):
         return len(self.tiles_not_in_place) == 0
 
     def move(self, user_move):
-        old_empty_spot, new_empty_spot = self.game_board.execute_move(user_move)
-        if new_empty_spot:
+        results = self.game_board.execute_move(user_move)
+        if results:
+            old_empty_spot, new_empty_spot = results
             self.update_game_state(old_empty_spot, new_empty_spot)
-        print(self.tiles_not_in_place)
 
     def update_game_state(self, old_empty_spot, new_empty_spot):
         if new_empty_spot in self.tiles_not_in_place:

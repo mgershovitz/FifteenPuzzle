@@ -46,18 +46,21 @@ class PuzzleGameUI(object):
             key = self.display.get_user_input()
             user_move = self.input_manager.get_user_move(key)
             if user_move is None:
-                break
-
-            self.game.move(user_move)
-
-        if isinstance(self.display, ControlledDisplayUtils):
-            self.display.break_display_control()
+                self.input_manager.user_input_loop(consts.SURE_YOU_WANT_TO_QUIT,
+                                                   [consts.YES, consts.NO],
+                                                   {'y': self.quit})
+                
+            if user_move:
+                self.game.move(user_move)
 
     def init_new_game_and_start(self):
         self.init_new_game()
         self.start()
 
     def quit(self):
+        if isinstance(self.display, ControlledDisplayUtils):
+            self.display.break_display_control()
+
         print(consts.GOODBYE)
         exit(0)
 

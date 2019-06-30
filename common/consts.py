@@ -17,6 +17,7 @@ CHOOSE_NEW_SETTING_VALUE_NUMERIC = "Enter new value for setting %s [%s]"
 CHOOSE_NEW_SETTING_VALUE_STR = "Enter new value for setting %s in the format - %s"
 CHOOSE_NEW_SETTING_VALUE = "Enter new value for setting %s"
 WIN_MESSAGE = "Hooray! you've won the game! Want to play again? [%s/%s]" % (YES, NO)
+SURE_YOU_WANT_TO_QUIT = "Are you sure you want to quit? [%s/%s]" % (YES, NO)
 
 MOVEMENT_SETTINGS_MESSAGE = "Choose the keys you want to use for the game (don't worry, we'll record them for later)"
 UP_KEY_MESSAGE = "Press the key you want to use for 'up' movement"
