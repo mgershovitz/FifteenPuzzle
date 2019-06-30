@@ -67,6 +67,7 @@ class PuzzleGameUI(object):
 
     def bootstrap(self):
         self.game_settings.load_settings()
+        self.keys_settings.load_settings()
         self.display = BasicDisplayUtils() if self.game_settings.get(consts.DISPLAY_TYPE_STR) == consts.BASIC_DISPLAY_TYPE \
             else ControlledDisplayUtils()
         self.input_manager = InputManager(self.game_settings, self.keys_settings, self.display)
