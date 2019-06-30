@@ -19,7 +19,7 @@ class PuzzleGame(object):
             self.board_size, game_settings.get(consts.EMPTY_SPOT_STR)
         )
 
-    def init_new_puzzle(self, fixed_board=None):
+    def generate_new_puzzle(self, fixed_board=None):
         self.game_board = self.board_generator.generate_board(
             difficulty=self.game_settings.get(consts.DIFFICULTY_LEVEL_STR),
             fixed_board=fixed_board

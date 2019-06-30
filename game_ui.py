@@ -19,13 +19,6 @@ class PuzzleGameUI(object):
         self.input_manager = None
         self.display = None
 
-    def init_new_game(self):
-        print(consts.README)
-        print(consts.INIT_NEW_BOARD)
-
-        self.game.init_new_puzzle()
-        print(consts.LETS_START_THE_GAME)
-
     def main_game_loop(self):
         self.display.init_display()
 
@@ -39,15 +32,12 @@ class PuzzleGameUI(object):
             key = self.display.get_user_input()
             user_move = self.input_manager.get_user_move(key)
             if user_move is None:
-                self.input_manager.basic_user_input_loop(consts.SURE_YOU_WANT_TO_QUIT, [consts.YES, consts.NO],
-                                                         {'y': self.quit})
+                user_quit = self.input_manager.basic_user_input_loop(consts.SURE_YOU_WANT_TO_QUIT, [consts.YES, consts.NO])
+                if user_quit == 'y':
+                    self.menu()
 
             if user_move:
                 self.game.move(user_move)
-
-    def start_new_game(self):
-        self.init_new_game()
-        self.main_game_loop()
 
     def quit(self):
         if isinstance(self.display, ControlledDisplayUtils):
@@ -56,13 +46,29 @@ class PuzzleGameUI(object):
         print(consts.GOODBYE)
         exit(0)
 
-    def run(self):
-        self.display.display_message(consts.GAME_OPENING)
-        self.input_manager.edit_game_settings()
-        self.input_manager.edit_keys_settings()
-        self.game.init_game(self.game_settings)
+    def start_new_game(self):
+        print(consts.INIT_NEW_BOARD)
+        self.game.generate_new_puzzle()
+        print(consts.LETS_START_THE_GAME)
 
-        self.start_new_game()
+        self.main_game_loop()
+
+    def menu(self):
+        self.display.display_message(consts.CHOOSE_OPTION)
+        self.input_manager.basic_user_input_loop(consts.MENU_OPTIONS,
+                                                 ['1', '2', '3', '4'],
+                                                 {'1': self.input_manager.handle_game_settings_edit,
+                                                  '2': self.input_manager.handle_keys_settings_edit,
+                                                  '3': self.start_new_game,
+                                                  '4': self.quit})
+        self.menu()
+
+    def run(self):
+        self.game.init_game(self.game_settings)
+        self.display.display_message(consts.GAME_OPENING)
+        self.display.display_message(consts.RULES)
+
+        self.menu()
 
     def bootstrap(self):
         self.game_settings.load_settings()

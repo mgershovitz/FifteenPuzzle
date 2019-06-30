@@ -9,12 +9,6 @@ class InputManager(object):
 
         self.display = display
 
-    def edit_game_settings(self):
-        self.edit_settings_prompt(consts.EDIT_GAME_SETTINGS_PROMPT, self.handle_game_settings_edit)
-
-    def edit_keys_settings(self):
-        self.edit_settings_prompt(consts.EDIT_KEYS_SETTINGS_PROMPT, self.handle_keys_settings_edit)
-
     def edit_settings_prompt(self, message, edit_func):
         self.basic_user_input_loop(message=message, valid_inputs=[consts.YES, consts.NO],
                                    input_to_action={'y': edit_func})
@@ -43,7 +37,7 @@ class InputManager(object):
 
         self.game_settings.set(setting_name, edit_params['type'], user_edit_value, edit_params['valid_inputs'])
         self.game_settings.save_settings()
-        self.edit_settings_prompt(consts.EDIT_GAME_SETTINGS_PROMPT, self.handle_game_settings_edit)
+        self.edit_settings_prompt(consts.EDIT_GAME_SETTINGS_AGAIN, self.handle_game_settings_edit)
 
     def handle_keys_settings_edit(self):
         self.display.display_table(self.keys_settings.settings_to_display())
@@ -61,13 +55,13 @@ class InputManager(object):
         move = self.keys_settings.keys_to_keys_names.get(char)
         return move
 
-    def basic_user_input_loop(self, message, valid_inputs, input_to_action):
+    def basic_user_input_loop(self, message, valid_inputs, input_to_action=None):
         user_input = None
         while user_input not in valid_inputs:
             self.display.display_message(message)
             user_input = self.display.get_user_input()
 
-        if user_input in input_to_action:
+        if input_to_action and user_input in input_to_action:
             input_to_action[user_input]()
 
         return user_input
