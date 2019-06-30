@@ -13,10 +13,16 @@ class PuzzleGame(object):
         self.get_new_randomized_board()
 
     def get_new_randomized_board(self):
-        board = [[1, 2, 3],
-                 [4, 5, 6],
-                 [7, 8, consts.EMPTY_STR]]
-        self.board = board
+        n = 1
+        self.board = list()
+        for i in range(0, self.board_size):
+            self.board.append(list())
+            for j in range(0, self.board_size):
+                if self.empty_spot.x == i and self.empty_spot.y == j:
+                    self.board[i].append(consts.EMPTY_STR)
+                else:
+                    self.board[i].append(n)
+                    n += 1
 
     def move(self, user_move):
         new_empty_spot = self.get_new_empty_spot_position(user_move)

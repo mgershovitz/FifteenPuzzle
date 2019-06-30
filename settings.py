@@ -44,6 +44,10 @@ class SettingsManager(object):
                 print(consts.CHOOSE_NEW_SETTING_VALUE_NUMERIC % (setting, '3/15'))
                 # TODO -Handle this!
                 self.settings[setting] = int(input())
+            elif setting in [consts.EMPTY_SPOT_STR]:
+                print(consts.CHOOSE_NEW_SETTING_VALUE_STR % (setting, 'x y'))
+                new_empty_spot_tuple = [int(i) for i in input().split(' ')]
+                self.settings[setting] = new_empty_spot_tuple
             else:
                 print(consts.CHOOSE_NEW_SETTING_VALUE % setting)
 

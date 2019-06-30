@@ -14,6 +14,7 @@ EDIT_SETTINGS_PROMPT = "Would you like to change the game settings? [%s/%s]" % (
 EDIT_MOVEMENT_SETTINGS_PROMPT = "Would you like to change the movement keys? [%s/%s]" % (YES, NO)
 CHOOSE_SETTING_TO_EDIT = "Choose the number of the setting you would like to edit [%s]"
 CHOOSE_NEW_SETTING_VALUE_NUMERIC = "Enter new value for setting %s [%s]"
+CHOOSE_NEW_SETTING_VALUE_STR = "Enter new value for setting %s in the format - %s"
 CHOOSE_NEW_SETTING_VALUE = "Enter new value for setting %s"
 WIN_MESSAGE = "Hooray! you've won the game! Want to play again? [%s/%s]" % (YES, NO)
 
