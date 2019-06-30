@@ -1,5 +1,8 @@
+import unittest
+
 from common import consts
 from game_logic import PuzzleGame
+from settings import SettingsManager
 
 WINNING_BOARD = [[1, 2, 3],
                  [4, 5, 6],
@@ -8,16 +11,15 @@ LOSING_BOARD = [[1, 2, 3],
                 [4, 5, 6],
                 [7, consts.EMPTY_STR, 8]]
 
-class TestGameBoard(object):
-    def __init__(self):
+class TestGameBoard(unittest.TestCase):
+    def setUp(self):
         self.tester = PuzzleGame()
+        self.test_settings = SettingsManager()
+        self.test_settings.load_settings()
 
-    def test_get_new_randomized_board(self):
-        pass
+    def test_game_won(self):
+        self.tester.init_game(self.test_settings, WINNING_BOARD)
+        assert self.tester.game_won()
 
-    def test_win(self):
-        self.tester.board = WINNING_BOARD
-        assert self.tester.win()
-
-        self.tester.board = LOSING_BOARD
-        assert not self.tester.win()
+        self.tester.init_game(self.test_settings, LOSING_BOARD)
+        assert not self.tester.game_won()

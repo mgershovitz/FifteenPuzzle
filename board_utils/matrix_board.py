@@ -69,6 +69,9 @@ class Board(object):
         if self.empty_spot.x < self.board_size - 1:
             return self.board[self.empty_spot.x + 1][self.empty_spot.y]
 
+    def __eq__(self, other):
+        return self.board == other.board
+
 class BoardPosition(object):
     def __init__(self, x, y):
         self.x = x

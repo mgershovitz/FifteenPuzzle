@@ -10,10 +10,13 @@ class PuzzleGame(object):
         self.tiles_in_place = set()
         self.tiles_not_in_place = set()
 
-    def init_game(self, game_settings):
+    def init_game(self, game_settings, fixed_board=None):
         self.board_size = game_settings.get(consts.BOARD_SIZE_STR)
         self.board = Board(self.board_size, game_settings.get(consts.EMPTY_SPOT_STR))
-        self.board.get_new_randomized_board()
+        if fixed_board:
+            self.board.board = fixed_board
+        else:
+            self.board.get_new_randomized_board()
         self.create_initial_game_state()
 
     def game_won(self):
