@@ -43,6 +43,7 @@ class InputManager(object):
 
         self.game_settings.set(setting_name, edit_params['type'], user_edit_value, edit_params['valid_inputs'])
         self.game_settings.save_settings()
+        self.edit_settings_prompt(consts.EDIT_GAME_SETTINGS_PROMPT, self.handle_game_settings_edit)
 
     def handle_keys_settings_edit(self):
         self.display.display_table(self.keys_settings.settings_to_display())

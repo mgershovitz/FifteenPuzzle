@@ -60,7 +60,6 @@ class PuzzleGameUI(object):
         self.display.display_message(consts.GAME_OPENING)
         self.input_manager.edit_game_settings()
         self.input_manager.edit_keys_settings()
-
         self.game.init_game(self.game_settings)
 
         self.start_new_game()
@@ -70,6 +69,7 @@ class PuzzleGameUI(object):
         self.keys_settings.load_settings()
         self.display = BasicDisplayUtils() if self.game_settings.get(consts.DISPLAY_TYPE_STR) == consts.BASIC_DISPLAY_TYPE \
             else ControlledDisplayUtils()
+        self.display.init_display()
         self.input_manager = InputManager(self.game_settings, self.keys_settings, self.display)
 
 

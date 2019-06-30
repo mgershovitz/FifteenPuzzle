@@ -13,10 +13,13 @@ class ControlledDisplayUtils(BasicDisplayUtils):
         self.init_display_control()
 
     def get_user_input(self):
-        return self.screen.getch
+        char = self.screen.getstr()
+        self.display_message(char)
+        return char
 
     def display_message(self, message):
         self.screen.addstr(0, 0, message)
+        self.get_user_input()
 
     def display_table(self, table):
         board_display_matrix = self.get_baord_display_matrix(table)

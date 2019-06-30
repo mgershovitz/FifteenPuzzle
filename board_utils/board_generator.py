@@ -35,7 +35,7 @@ class RandomBoardGenerator(object):
         if fixed_board:
             self.game_board.board = fixed_board
         else:
-            for i in range(0, 10*difficulty):
+            for i in range(0, 5*difficulty):
                 self.move_randomly()
 
         return self.game_board

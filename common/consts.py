@@ -11,6 +11,7 @@ LETS_START_THE_GAME = "Lets start the game!\n" \
                       "Use your arrow keys to move any plate adjacent to an empty spot into the empty spot\n" \
                       "and press any other key to quit"
 EDIT_GAME_SETTINGS_PROMPT = "Would you like to change the game settings? [%s/%s]" % (YES, NO)
+EDIT_GAME_SETTINGS_AGAIN = "Would you like to change another game settings? [%s/%s]" % (YES, NO)
 EDIT_KEYS_SETTINGS_PROMPT = "Would you like to change the control keys? [%s/%s]" % (YES, NO)
 CHOOSE_SETTING_TO_EDIT = "Choose the number of the setting you would like to edit [%s]"
 CHOOSE_NEW_SETTING_VALUE_NUMERIC = "Enter new value for setting %s [%s]"
