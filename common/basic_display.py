@@ -5,16 +5,12 @@ class BasicDisplayUtils(object):
     def __init__(self):
         pass
 
-    def init_display(self):
-        pass
-
-    def get_user_input(self):
-        return str(input())
-
-    def display_message(self, message):
+    @staticmethod
+    def display_message(message):
         print(message)
 
-    def display_table(self, table):
+    @staticmethod
+    def display_table(table):
         t = texttable.Texttable()
         for i in range(0, len(table)):
             t.add_row([val for val in table[i]])

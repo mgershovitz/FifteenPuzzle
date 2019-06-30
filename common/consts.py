@@ -2,6 +2,7 @@ YES = 'y'
 NO = 'n'
 MENU = 'm'
 START = 's'
+QUIT = 'q'
 EMPTY_STR = " "
 
 # User Messages
