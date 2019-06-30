@@ -1,27 +1,22 @@
 from board_utils.board_generator import RandomBoardGenerator
 from common import consts
-from board_utils.matrix_board import Board, BoardPosition
-
+from board_utils.matrix_board import BoardPosition
 
 class PuzzleGame(object):
     def __init__(self):
         self.game_board = None
         self.board_size = None
+        self.board_generator = None
 
         self.tiles_in_place = set()
         self.tiles_not_in_place = set()
 
-        self.board_generator = RandomBoardGenerator(self.board_size)
-
     def init_game(self, game_settings, fixed_board=None):
         self.board_size = game_settings.get(consts.BOARD_SIZE_STR)
-        empty_spot = game_settings.get(consts.EMPTY_SPOT_STR)
-        if fixed_board:
-            board = fixed_board
-        else:
-            board = self.board_generator.generate_board(empty_spot)
-
-        self.game_board = Board(board, self.board_size, empty_spot)
+        self.board_generator = RandomBoardGenerator(
+            self.board_size, game_settings.get(consts.EMPTY_SPOT_STR)
+        )
+        self.game_board = self.board_generator.generate_board(fixed_board=fixed_board)
         self.create_initial_game_state()
 
     def game_won(self):
