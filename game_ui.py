@@ -1,7 +1,7 @@
 from common import consts
 from common.basic_display import BasicDisplayUtils
 from game_logic import PuzzleGame
-from input_manager import InputManager
+from common.input_manager import InputManager
 from menus import Menus
 from settings.settings import GameSettingsManager, KeySettingsManager
 
