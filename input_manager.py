@@ -1,5 +1,5 @@
 from common import consts
-from settings import SettingsType
+from settings.settings import SettingsType
 
 
 class InputManager(object):
@@ -38,6 +38,8 @@ class InputManager(object):
             user_edit_value = self.display.get_user_input()
             if edit_params['type'] == SettingsType.TYPE_NUMERIC:
                 user_edit_value = int(user_edit_value)
+            elif edit_params['type'] == SettingsType.TYPE_TUPLE:
+                user_edit_value = [int(item) for item in user_edit_value.split(' ')]
 
         self.game_settings.set(setting_name, edit_params['type'], user_edit_value, edit_params['valid_inputs'])
         self.game_settings.save_settings()

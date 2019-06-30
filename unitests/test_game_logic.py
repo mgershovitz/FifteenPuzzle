@@ -3,7 +3,7 @@ import unittest
 
 from common import consts
 from game_logic import PuzzleGame
-from settings import GameSettingsManager
+from settings.settings import GameSettingsManager
 
 COMPLETED_BOARD = [[1, 2, 3],
                    [4, 5, 6],

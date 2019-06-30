@@ -118,7 +118,11 @@ class GameSettingsManager(Settings):
                 'msg': consts.CHOOSE_NEW_SETTING_VALUE_NUMERIC % (consts.DIFFICULTY_LEVEL_STR, '1-20'),
                 'valid_inputs': range(1, 20),
                 'type': SettingsType.TYPE_NUMERIC
-
+            },
+            consts.DISPLAY_TYPE_STR: {
+                'msg': consts.CHOOSE_NEW_SETTING_VALUE_STR % (consts.DIFFICULTY_LEVEL_STR, 'basic/controlled'),
+                'valid_inputs': [consts.BASIC_DISPLAY_TYPE, consts.CONTROLLED_DISPLAY_TYPE],
+                'type': SettingsType.TYPE_STR
             }
         }
 

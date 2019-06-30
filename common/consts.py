@@ -26,8 +26,8 @@ RIGHT_KEY_MESSAGE = "Press the key you want to use for 'right' movement"
 LEFT_KEY_MESSAGE = "Press the key you want to use for 'left' movement"
 
 # Game Settings
-GAME_SETTINGS_FILE = "/common/game_settings.json"
-KEYS_SETTINGS_FILE = "/common/keys_settings.json"
+GAME_SETTINGS_FILE = "/game_settings.json"
+KEYS_SETTINGS_FILE = "/keys_settings.json"
 
 BOARD_SIZE_STR = "Board Size"
 EMPTY_SPOT_STR = "Empty Spot"
@@ -37,6 +37,7 @@ DIFFICULTY_LEVEL_STR = "Difficulty"
 # Display Settings
 TABLE_PADDING = 3
 BASIC_DISPLAY_TYPE = "basic"
+CONTROLLED_DISPLAY_TYPE = "controlled"
 
 # Directions
 RIGHT = 'Right'

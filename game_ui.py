@@ -3,7 +3,7 @@ from display_modules.basic_display import BasicDisplayUtils
 from display_modules.controlled_display import ControlledDisplayUtils
 from game_logic import PuzzleGame
 from input_manager import InputManager
-from settings import GameSettingsManager, KeySettingsManager
+from settings.settings import GameSettingsManager, KeySettingsManager
 
 
 class PuzzleGameUI(object):
