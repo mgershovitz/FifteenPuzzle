@@ -24,12 +24,11 @@ RIGHT_KEY_MESSAGE = "Press the key you want to use for 'right' movement"
 LEFT_KEY_MESSAGE = "Press the key you want to use for 'left' movement"
 
 # Game Settings
+SETTINGS_FILE = "/common/settings.json"
+
 BOARD_SIZE_STR = "Board Size"
 EMPTY_SPOT_STR = "Empty Spot"
 DISPLAY_TYPE_STR = "Display Type"
-
-DEFAULT_BOARD_SIZE = 3
-DEFAULT_DISPLAY_TYPE = "Basic"
 
 UP_KEY = 'k'
 DOWN_KEY = ','
@@ -38,6 +37,7 @@ RIGHT_KEY = '.'
 
 # Display Settings
 TABLE_PADDING = 3
+BASIC_DISPLAY_TYPE = "basic"
 
 # Directions
 RIGHT = 'Right'
