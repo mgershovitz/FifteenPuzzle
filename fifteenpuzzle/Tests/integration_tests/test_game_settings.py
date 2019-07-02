@@ -3,7 +3,7 @@ import unittest
 from common import consts
 from game_logic import PuzzleGame
 from settings.settings import SettingsType
-from game_settings import GameSettingsManager
+from settings.game_settings import GameSettingsManager
 
 
 class TestGameBoard(unittest.TestCase):

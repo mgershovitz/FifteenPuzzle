@@ -4,21 +4,19 @@ from board_utils.matrix_board import BoardPosition
 
 class PuzzleGame(object):
     def __init__(self):
-        self.board_size = None
         self.game_board = None
-        self.random_board_generator = None
+        self.random_board_generator = RandomBoardGenerator()
 
         self.tiles_in_place = None
         self.tiles_not_in_place = None
 
-    def generate_new_puzzle(self, game_settings, fixed_board=None):
-        if game_settings.get(consts.BOARD_SIZE_STR) != self.board_size:
-            self.board_size = game_settings.get(consts.BOARD_SIZE_STR)
-            self.random_board_generator = RandomBoardGenerator(self.board_size)
+    def generate_new_puzzle(self, game_settings, fixed_board=None, fixed_empty_spot=None):
+        if game_settings.get(consts.BOARD_SIZE_STR) != self.random_board_generator.board_size:
+            self.random_board_generator.reset_board_size(game_settings.get(consts.BOARD_SIZE_STR))
 
         self.game_board = self.random_board_generator.generate_board(
             difficulty=game_settings.get(consts.DIFFICULTY_LEVEL_STR),
-            fixed_board=fixed_board
+            fixed_board=fixed_board, fixed_empty_spot=fixed_empty_spot
         )
         self.create_initial_game_state()
 
@@ -46,8 +44,8 @@ class PuzzleGame(object):
         self.tiles_in_place = set()
         self.tiles_not_in_place = set()
 
-        for i in range(0, self.board_size):
-            for j in range(0, self.board_size):
+        for i in range(0, self.game_board.board_size):
+            for j in range(0, self.game_board.board_size):
                 pos = BoardPosition(i, j)
                 if self.game_board.get(pos) == consts.EMPTY_STR:
                     continue

@@ -5,10 +5,18 @@ from common import consts
 
 
 class RandomBoardGenerator(object):
-    def __init__(self, board_size):
-        self.board_size = board_size
-        self.empty_spot = BoardPosition(self.board_size-1, self.board_size-1)
+    def __init__(self):
+        self.board_size = None
+        self.empty_spot = None
+        self.solved_board = None
+
+    def reset_board_size(self, new_board_size):
+        self.board_size = new_board_size
+        self.empty_spot = self.get_empty_spot()
         self.solved_board = self.get_solved_board()
+
+    def get_empty_spot(self):
+        return BoardPosition(self.board_size-1, self.board_size-1)
 
     def get_solved_board(self):
         n = 1
@@ -23,11 +31,13 @@ class RandomBoardGenerator(object):
                     n += 1
         return board
 
-    def generate_board(self, difficulty, fixed_board=None):
+    def generate_board(self, difficulty, fixed_board=None, fixed_empty_spot=None):
         if fixed_board:
+            self.empty_spot = fixed_empty_spot
+            self.board_size = len(fixed_board)
             board = Board(
                 copy.deepcopy(fixed_board),
-                len(fixed_board),
+                self.board_size,
                 self.empty_spot
             )
         else:
