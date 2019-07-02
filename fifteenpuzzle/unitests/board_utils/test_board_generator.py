@@ -1,5 +1,5 @@
 import unittest
-from board_utils.board_generator import RandomBoardGenerator
+from fifteenpuzzle.board_utils.board_generator import RandomBoardGenerator
 
 class TestBoard(unittest.TestCase):
     def setUp(self):

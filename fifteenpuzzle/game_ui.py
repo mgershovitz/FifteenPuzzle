@@ -63,7 +63,7 @@ class PuzzleGameUI(object):
         self.game_settings.load_settings()
         self.keys_settings.load_settings()
         self.display = BasicDisplayUtils()
-        self.input_manager = InputManager(self.game_settings, self.keys_settings, self.display)
+        self.input_manager = InputManager(self.keys_settings, self.display)
         self.menus = Menus(self.input_manager, self.display, self.game_settings, self.keys_settings,
                            self.start_new_game, self.quit)
 

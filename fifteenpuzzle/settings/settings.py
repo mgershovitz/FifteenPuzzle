@@ -3,6 +3,7 @@ import os
 
 from common import consts
 
+
 class SettingsType(object):
     TYPE_NUMERIC = 'numeric'
     TYPE_STR = 'str'

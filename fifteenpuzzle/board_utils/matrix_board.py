@@ -1,5 +1,6 @@
 from common import consts
 
+
 class Board(object):
     def __init__(self, board, board_size, empty_spot):
         self.board = board

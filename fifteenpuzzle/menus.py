@@ -3,8 +3,8 @@ from settings.settings import SettingsType
 
 
 class MenuOption(object):
-    def __init__(self, option, action):
-        self.option = option
+    def __init__(self, option_name, action):
+        self.option_name = option_name
         self.action = action
 
     def choose(self):
@@ -32,7 +32,11 @@ class Menus(object):
         }
 
     def open_main_menu(self):
-        user_input = self.input_manager.basic_user_input_loop(consts.MENU_OPTIONS,
+        menu_for_display = [consts.CHOOSE_OPTION]
+        for option_id, option in self.main_menu.items():
+            menu_for_display.append("%s) %s" % (option_id, option.option_name))
+        menu_for_display = '\n'.join(menu_for_display)
+        user_input = self.input_manager.basic_user_input_loop(menu_for_display,
                                                               ['1', '2', '3', '4'])
         self.main_menu[user_input].choose()
         self.open_main_menu()

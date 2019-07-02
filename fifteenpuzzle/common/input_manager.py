@@ -1,6 +1,5 @@
 class InputManager(object):
-    def __init__(self, game_settings, keys_settings, display):
-        self.game_settings = game_settings
+    def __init__(self, keys_settings, display):
         self.keys_settings = keys_settings
         self.display = display
 

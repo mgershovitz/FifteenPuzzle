@@ -14,7 +14,6 @@ INIT_NEW_BOARD = "Initializing a new board for you..."
 LETS_START_THE_GAME = "Lets start the game!\n" \
                       "Use your arrow keys to move any plate adjacent to an empty spot and press any other key to quit."
 
-MENU_OPTIONS = "\nChoose option:\n1) Edit game settings\n2) Edit control keys\n3) Start a new game\n4) Quit"
 OPTION_EDIT_GAME_SETTINGS = "Edit game settings"
 OPTION_EDIT_CONTROL_KEYS = "Edit control keys"
 OPTION_START_NEW_GAME = "Start a new game"
@@ -22,6 +21,7 @@ OPTION_QUIT = "Quit"
 
 EDIT_GAME_SETTINGS_AGAIN = "Would you like to change another game settings? [%s/%s]" % (YES, NO)
 
+CHOOSE_OPTION = "Choose Option:"
 CHOOSE_SETTING_TO_EDIT = "Choose the number of the setting you would like to edit [%s]"
 CHOOSE_NEW_SETTING_VALUE = "Enter new value for setting %s [%s]"
 CHOOSE_NEW_SETTING_VALUE_IN_FORMAT = "Enter new value for setting %s in the format - %s"
@@ -34,7 +34,6 @@ RULES = "The objective of the game is to get all the tiles on your bord in the r
         "To order your tiles, use your arrow keys to move tiles adjacent to the empty spot,\n" \
         "when all the tiles are in the right place the game is won."
 
-MOVEMENT_SETTINGS_MESSAGE = "Choose the keys you want to use for the game (don't worry, we'll record them for later)"
 UP_KEY_MESSAGE = "Press the key you want to use for 'up' movement"
 DOWN_KEY_MESSAGE = "Press the key you want to use for 'down' movement"
 RIGHT_KEY_MESSAGE = "Press the key you want to use for 'right' movement"
@@ -49,7 +48,6 @@ DISPLAY_TYPE_STR = "Display Type"
 DIFFICULTY_LEVEL_STR = "Difficulty"
 
 # Display Settings
-TABLE_PADDING = 3
 BASIC_DISPLAY_TYPE = "basic"
 
 # Directions
