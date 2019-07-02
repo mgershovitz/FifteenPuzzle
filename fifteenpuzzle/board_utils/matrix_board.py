@@ -1,6 +1,6 @@
 import numpy as np
 
-from fifteenpuzzle.common import consts
+from common import consts
 
 
 class Board(object):

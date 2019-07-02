@@ -1,5 +1,5 @@
-from fifteenpuzzle.common import consts
-from fifteenpuzzle.settings.settings import SettingsType
+from common import consts
+from settings.settings import SettingsType
 
 
 class MenuOption(object):
@@ -81,3 +81,5 @@ class Menus(object):
         if self.input_manager.basic_user_input_loop(
                 message=consts.EDIT_GAME_SETTINGS_AGAIN, valid_inputs=[consts.YES, consts.NO]) == consts.YES:
             self.open_game_settings_menu()
+
+        self.game_settings.save_settings()

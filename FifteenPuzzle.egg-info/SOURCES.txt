@@ -19,5 +19,7 @@ fifteenpuzzle/common/consts.py
 fifteenpuzzle/common/input_manager.py
 fifteenpuzzle/settings/__init__.py
 fifteenpuzzle/settings/game_settings.json
+fifteenpuzzle/settings/game_settings.py
+fifteenpuzzle/settings/key_settings.py
 fifteenpuzzle/settings/keys_settings.json
 fifteenpuzzle/settings/settings.py

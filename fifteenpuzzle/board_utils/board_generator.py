@@ -1,7 +1,7 @@
 import copy
 
-from fifteenpuzzle.board_utils.matrix_board import BoardPosition, Board
-from fifteenpuzzle.common import consts
+from board_utils.matrix_board import BoardPosition, Board
+from common import consts
 
 
 class RandomBoardGenerator(object):

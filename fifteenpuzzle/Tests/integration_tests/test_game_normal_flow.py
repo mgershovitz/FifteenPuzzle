@@ -1,9 +1,10 @@
 import copy
 import unittest
 
-from fifteenpuzzle.common import consts
-from fifteenpuzzle.game_logic import PuzzleGame
-from fifteenpuzzle.settings.settings import GameSettingsManager, SettingsType
+from common import consts
+from game_logic import PuzzleGame
+from settings.settings import SettingsType
+from settings.game_settings import GameSettingsManager
 
 COMPLETED_BOARD = [[1, 2, 3],
                    [4, 5, 6],

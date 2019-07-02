@@ -1,9 +1,10 @@
-from fifteenpuzzle.common import consts
-from fifteenpuzzle.common.basic_display import BasicDisplayUtils
-from fifteenpuzzle.game_logic import PuzzleGame
-from fifteenpuzzle.common.input_manager import InputManager
-from fifteenpuzzle.menus import Menus
-from fifteenpuzzle.settings.settings import GameSettingsManager, KeySettingsManager
+from common import consts
+from common.basic_display import BasicDisplayUtils
+from game_logic import PuzzleGame
+from common.input_manager import InputManager
+from menus import Menus
+from settings.key_settings import KeySettingsManager
+from settings.game_settings import GameSettingsManager
 
 
 class PuzzleGameUI(object):
