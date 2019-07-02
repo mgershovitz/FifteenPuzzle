@@ -3,7 +3,7 @@ import unittest
 
 from fifteenpuzzle.common import consts
 from fifteenpuzzle.game_logic import PuzzleGame
-from fifteenpuzzle.settings.settings import GameSettingsManager
+from fifteenpuzzle.settings.settings import GameSettingsManager, SettingsType
 
 COMPLETED_BOARD = [[1, 2, 3],
                    [4, 5, 6],
@@ -26,6 +26,7 @@ class TestGameBoard(unittest.TestCase):
         self.tester = PuzzleGame()
         self.test_settings = GameSettingsManager()
         self.test_settings.load_settings()
+        self.test_settings.set(consts.BOARD_SIZE_STR, SettingsType.TYPE_NUMERIC, 3)
 
     def test_initial_boards_game_won(self):
         self.tester.generate_new_puzzle(self.test_settings, fixed_board=get_completed_board())

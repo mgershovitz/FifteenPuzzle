@@ -1,3 +1,5 @@
+import numpy as np
+
 from fifteenpuzzle.common import consts
 
 
@@ -92,6 +94,11 @@ class BoardPosition(object):
 
     def get_bellow_neighbour(self):
         return BoardPosition(self.x + 1, self.y)
+
+    @classmethod
+    def get_random_pos(cls, board_size):
+        pos = np.random.randint(0, high=board_size, size=2)
+        return BoardPosition(pos[0], pos[1])
 
     def __repr__(self):
         return "(%d/%d)" % (self.x, self.y)

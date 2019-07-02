@@ -104,8 +104,8 @@ class GameSettingsManager(Settings):
     def get_setting_name_to_edit_params():
         return {
             consts.BOARD_SIZE_STR: {
-                'msg': consts.CHOOSE_NEW_SETTING_VALUE % (consts.BOARD_SIZE_STR, '2/9'),
-                'valid_inputs': range(2,10),
+                'msg': consts.CHOOSE_NEW_SETTING_VALUE % (consts.BOARD_SIZE_STR, '3/9'),
+                'valid_inputs': range(3,10),
                 'type': SettingsType.TYPE_NUMERIC
             },
             consts.DIFFICULTY_LEVEL_STR: {

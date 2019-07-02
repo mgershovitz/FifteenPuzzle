@@ -1,5 +1,4 @@
 import copy
-import random
 
 from fifteenpuzzle.board_utils.matrix_board import BoardPosition, Board
 from fifteenpuzzle.common import consts
@@ -38,14 +37,22 @@ class RandomBoardGenerator(object):
                 self.empty_spot
             )
             for i in range(0, 5*difficulty):
-                self.move_randomly(board)
+                self.execute_random_inversion(board)
+                self.execute_random_inversion(board)
 
         return board
 
-    @classmethod
-    def move_randomly(cls, board):
-        optional_moves = [
-            pos for pos in board.empty_spot.get_all_neighbours() if board.is_valid_board_position(pos)
-        ]
-        chosen_move = random.choice(optional_moves)
-        board.move_empty_spot_to_new_position(chosen_move)
+    def execute_random_inversion(self, board):
+        # select 2 random positions
+
+        first_pos = BoardPosition.get_random_pos(self.board_size)
+        while first_pos == self.empty_spot:
+            first_pos = BoardPosition.get_random_pos(self.board_size)
+
+        second_pos = BoardPosition.get_random_pos(self.board_size)
+        while second_pos == first_pos or second_pos == self.empty_spot:
+            second_pos = BoardPosition.get_random_pos(self.board_size)
+
+        tmp = board.get(first_pos)
+        board.set(first_pos, board.get(second_pos))
+        board.set(second_pos, tmp)
