@@ -1,1 +1,1 @@
-{"Right": "", "Left": "", "Up": "", "Down": ""}
+{"Right": "\u001b[C", "Left": "\u001b[D", "Up": "\u001b[A", "Down": "\u001b[B"}
