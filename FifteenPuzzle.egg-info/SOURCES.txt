@@ -1,4 +1,5 @@
 MANIFEST.in
+setup.py
 FifteenPuzzle.egg-info/PKG-INFO
 FifteenPuzzle.egg-info/SOURCES.txt
 FifteenPuzzle.egg-info/dependency_links.txt
@@ -8,3 +9,12 @@ fifteenpuzzle/__init__.py
 fifteenpuzzle/game_logic.py
 fifteenpuzzle/game_ui.py
 fifteenpuzzle/menus.py
+fifteenpuzzle/board_utils/__init__.py
+fifteenpuzzle/board_utils/board_generator.py
+fifteenpuzzle/board_utils/matrix_board.py
+fifteenpuzzle/common/__init__.py
+fifteenpuzzle/common/basic_display.py
+fifteenpuzzle/common/consts.py
+fifteenpuzzle/common/input_manager.py
+fifteenpuzzle/settings/__init__.py
+fifteenpuzzle/settings/settings.py
