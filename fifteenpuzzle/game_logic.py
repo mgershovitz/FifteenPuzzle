@@ -6,13 +6,17 @@ class PuzzleGame(object):
     def __init__(self):
         self.board_size = None
         self.game_board = None
+        self.random_board_generator = None
 
         self.tiles_in_place = None
         self.tiles_not_in_place = None
 
     def generate_new_puzzle(self, game_settings, fixed_board=None):
-        self.board_size = game_settings.get(consts.BOARD_SIZE_STR)
-        self.game_board = RandomBoardGenerator(self.board_size).generate_board(
+        if game_settings.get(consts.BOARD_SIZE_STR) != self.board_size:
+            self.board_size = game_settings.get(consts.BOARD_SIZE_STR)
+            self.random_board_generator = RandomBoardGenerator(self.board_size)
+
+        self.game_board = self.random_board_generator.generate_board(
             difficulty=game_settings.get(consts.DIFFICULTY_LEVEL_STR),
             fixed_board=fixed_board
         )

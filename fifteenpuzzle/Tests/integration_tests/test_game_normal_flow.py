@@ -28,14 +28,14 @@ class TestGameBoard(unittest.TestCase):
         self.test_settings.load_settings()
 
     def test_initial_boards_game_won(self):
-        self.tester.init_game(self.test_settings, get_completed_board())
+        self.tester.generate_new_puzzle(self.test_settings, fixed_board=get_completed_board())
         assert self.tester.game_won()
 
-        self.tester.init_game(self.test_settings, get_almost_complete_board())
+        self.tester.generate_new_puzzle(self.test_settings, fixed_board=get_almost_complete_board())
         assert not self.tester.game_won()
 
     def test_game_won_with_move(self):
-        self.tester.init_game(self.test_settings, get_almost_complete_board())
+        self.tester.generate_new_puzzle(self.test_settings, fixed_board=get_almost_complete_board())
         assert not self.tester.game_won()
         self.tester.move(consts.LEFT)
         assert self.tester.game_won()
