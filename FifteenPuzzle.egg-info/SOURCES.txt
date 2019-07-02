@@ -1,4 +1,5 @@
 MANIFEST.in
+README.md
 setup.py
 FifteenPuzzle.egg-info/PKG-INFO
 FifteenPuzzle.egg-info/SOURCES.txt
@@ -17,4 +18,6 @@ fifteenpuzzle/common/basic_display.py
 fifteenpuzzle/common/consts.py
 fifteenpuzzle/common/input_manager.py
 fifteenpuzzle/settings/__init__.py
+fifteenpuzzle/settings/game_settings.json
+fifteenpuzzle/settings/keys_settings.json
 fifteenpuzzle/settings/settings.py
