@@ -1,5 +1,5 @@
-from common import consts
-from settings.settings import SettingsType
+from fifteenpuzzle.common import consts
+from fifteenpuzzle.settings.settings import SettingsType
 
 
 class MenuOption(object):

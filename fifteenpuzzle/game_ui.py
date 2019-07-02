@@ -1,9 +1,9 @@
-from common import consts
-from common.basic_display import BasicDisplayUtils
-from game_logic import PuzzleGame
-from common.input_manager import InputManager
-from menus import Menus
-from settings.settings import GameSettingsManager, KeySettingsManager
+from fifteenpuzzle.common import consts
+from fifteenpuzzle.common.basic_display import BasicDisplayUtils
+from fifteenpuzzle.game_logic import PuzzleGame
+from fifteenpuzzle.common.input_manager import InputManager
+from fifteenpuzzle.menus import Menus
+from fifteenpuzzle.settings.settings import GameSettingsManager, KeySettingsManager
 
 
 class PuzzleGameUI(object):
@@ -67,8 +67,11 @@ class PuzzleGameUI(object):
         self.menus = Menus(self.input_manager, self.display, self.game_settings, self.keys_settings,
                            self.start_new_game, self.quit)
 
-
-if __name__ == '__main__':
+def play_in_cli():
     game = PuzzleGameUI()
     game.bootstrap()
     game.run()
+
+
+if __name__ == '__main__':
+    play_in_cli()

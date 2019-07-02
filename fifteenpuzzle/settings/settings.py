@@ -1,7 +1,7 @@
 import json
 import os
 
-from common import consts
+from fifteenpuzzle.common import consts
 
 
 class SettingsType(object):

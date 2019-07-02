@@ -1,4 +1,4 @@
-from common import consts
+from fifteenpuzzle.common import consts
 
 
 class Board(object):

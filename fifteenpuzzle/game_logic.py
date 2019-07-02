@@ -1,6 +1,6 @@
-from board_utils.board_generator import RandomBoardGenerator
-from common import consts
-from board_utils.matrix_board import BoardPosition
+from fifteenpuzzle.board_utils.board_generator import RandomBoardGenerator
+from fifteenpuzzle.common import consts
+from fifteenpuzzle.board_utils.matrix_board import BoardPosition
 
 class PuzzleGame(object):
     def __init__(self):

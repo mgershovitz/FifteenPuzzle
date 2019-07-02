@@ -1,0 +1,3 @@
+[console_scripts]
+fifteenpuzzle = fifteenpuzzle.game_ui:play_in_cli
+
