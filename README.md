@@ -6,4 +6,4 @@ A Python implementation of the sliding game "15 Puzzle" - https://en.wikipedia.o
 To install the game ues pip - 
 pip install git+https://github.com/mgershovitz/FifteenPuzzle
 
-After installing you can run the game with the command fifteenpuzzle
+After installing you can run the game with the command fifteenpuzzle as a command line tool.
